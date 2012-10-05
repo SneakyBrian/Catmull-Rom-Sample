@@ -33,7 +33,14 @@ namespace Catmull_Rom_Sample
 
         private void CalculateButton_Click(object sender, EventArgs e)
         {
-            var splinePoints = CatmullRomSpline.Generate(_keyPoints.ToArray(), 10);
+            var keyPoints = new List<PointF>();
+
+            keyPoints.AddRange(_keyPoints);
+            keyPoints.Add(_keyPoints[0]);
+            keyPoints.Add(_keyPoints[1]);
+            keyPoints.Add(_keyPoints[2]);
+
+            var splinePoints = CatmullRomSpline.Generate(keyPoints.ToArray(), 10);
 
             using (var gfx = this.CreateGraphics())
             {
